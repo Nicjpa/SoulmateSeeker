@@ -1,6 +1,12 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SoulmateSeeker.Data;
+using SoulmateSeeker.Extensions;
+using SoulmateSeeker.Interfaces;
+using SoulmateSeeker.Services;
+using System.Text;
 
 namespace SoulmateSeeker
 {
@@ -11,12 +17,10 @@ namespace SoulmateSeeker
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("SoulSeekerDbConnection"));
-            });
+            builder.Services.AddApplicationServices(builder.Configuration);
             builder.Services.AddControllers();
             builder.Services.AddCors();
+            builder.Services.AddIdentityServices(builder.Configuration);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -36,6 +40,8 @@ namespace SoulmateSeeker
             app.UseRouting();
 
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
