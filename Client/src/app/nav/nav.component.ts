@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -12,23 +12,31 @@ export class NavComponent implements OnInit {
   model: any = {};
   username: string;
 
-  constructor(public accountService: AccountService) { }
+  constructor(
+    private accountService: AccountService, 
+    private router: Router, 
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe(user => {
-      if(user) this.username = user.username.charAt(0).toUpperCase() + user.username.slice(1);;
+      if(user) this.username = user.username;
     })
   }
 
   login() {
     this.accountService.login(this.model).subscribe(response => { 
+      this.router.navigateByUrl("/members");
     }, error => {
-      console.log(error.error);
+      console.log(error.error.errors);
+      const errorMessage = !!error?.error?.errors ? "Username or password cannot be empty" : error.error; 
+      this.toastr.error(errorMessage);
     });
   }
 
   logout() {
     this.accountService.logout(); 
     this.model = {}; 
+    this.username = null;
+    this.router.navigateByUrl("/");
   }
 }
