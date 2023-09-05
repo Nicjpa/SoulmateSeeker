@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Soulmate Seeker</a>
-        <ul *ngIf="loggedIn" class="navbar-nav me-auto mb-2 mb-md-0">
+        <ul *ngIf="accountService.currentUser$ | async" class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
             <a class="nav-link" href="#">Matches</a>
           </li>
@@ -11,13 +11,10 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Messages</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="logout()">Logout</a>
-          </li>
         </ul>
 
-        <div *ngIf="loggedIn" class="dropdown" dropdown>
-            <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{model.username}}</a>
+        <div *ngIf="accountService.currentUser$ | async" class="dropdown" dropdown>
+            <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{ username }}</a>
             <div class="dropdown-menu mt-2" *dropdownMenu>
                 <a class="dropdown-item">Edit Profile</a>
                 <div class="dropdown-divider"></div>
@@ -25,7 +22,7 @@
             </div>
         </div>
 
-        <form #loginForm="ngForm" *ngIf="!loggedIn" class="d-flex" (ngSubmit)="login()" autocomplete="off">
+        <form #loginForm="ngForm" *ngIf="(accountService.currentUser$ | async) === null" class="d-flex" (ngSubmit)="login()" autocomplete="off">
             <input 
                 [(ngModel)]="model.username"
                 name="username"
