@@ -16,5 +16,5 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BsDropdownModule,
     ToastrModule,
   ]
-})
+}) 
 export class SharedModule { }
