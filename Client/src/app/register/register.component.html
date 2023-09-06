@@ -12,3 +12,11 @@
         <button class="btn btn-success" (click)="cancel()" type="button">Cancel</button>
     </div>
 </form>
+
+<div class="row mt-5" *ngIf="validationErrors.length > 0">
+    <ul class="text-danger validations">
+        <li *ngFor="let error of validationErrors">
+            {{ error }}
+        </li>
+    </ul>
+</div>

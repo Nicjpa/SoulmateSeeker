@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using SoulmateSeeker.Data;
 using SoulmateSeeker.Extensions;
 using SoulmateSeeker.Interfaces;
+using SoulmateSeeker.Middleware;
 using SoulmateSeeker.Services;
 using System.Text;
 
@@ -34,6 +35,8 @@ namespace SoulmateSeeker
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

@@ -1,9 +1,6 @@
-.form-group {
-    margin-bottom: 15px;
-}
-
-.mr-2 {
-    margin-right: 10px;
+.container {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .validations {

@@ -26,10 +26,6 @@ export class NavComponent implements OnInit {
   login() {
     this.accountService.login(this.model).subscribe(response => { 
       this.router.navigateByUrl("/members");
-    }, error => {
-      console.log(error.error.errors);
-      const errorMessage = !!error?.error?.errors ? "Username or password cannot be empty" : error.error; 
-      this.toastr.error(errorMessage);
     });
   }
 

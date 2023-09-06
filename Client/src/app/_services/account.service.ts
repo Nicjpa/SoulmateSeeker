@@ -15,6 +15,14 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
+  getCurrentUser() {
+    return this.currentUser$;
+  }
+
+  setCurrentUser(user: User) {
+    this.currentUserSource.next(user);
+  }
+
   login(model: any){
     return this.http.post(this.baseUrl + "account/login", model).pipe(
       map((user: User) => {
@@ -35,10 +43,6 @@ export class AccountService {
         }
       })
     )
-  }
-
-  setCurrentUser(user: User) {
-    this.currentUserSource.next(user);
   }
 
   logout() {

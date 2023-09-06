@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
+  validationErrors: string[] = [];
 
   constructor(private accountService: AccountService, private toastr: ToastrService) { }
 
@@ -17,8 +18,7 @@ export class RegisterComponent {
     this.accountService.register(this.model).subscribe(response => {
       this.cancel();
     }, error => {
-      console.log(error);
-      this.toastr.error("Invalid username or password");
+      this.validationErrors = error;
     });
   }
 
