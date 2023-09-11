@@ -227,7 +227,7 @@ namespace SoulmateSeeker.Data
                 {
                     Id = 5,
                     AppUserId = 5,
-                    Url = "https://randomuser.me/api/portraits/men/84.jpg",
+                    Url = "https://randomuser.me/api/portraits/women/84.jpg",
                     IsMain = true,
                 },
 

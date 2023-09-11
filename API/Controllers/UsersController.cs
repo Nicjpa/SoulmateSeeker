@@ -20,6 +20,7 @@ namespace SoulmateSeeker.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
@@ -28,6 +29,7 @@ namespace SoulmateSeeker.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
