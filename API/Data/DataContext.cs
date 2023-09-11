@@ -231,13 +231,13 @@ namespace SoulmateSeeker.Data
                     IsMain = true,
                 },
 
-                new Photo()
-                {
-                    Id = 6,
-                    AppUserId = 6,
-                    Url = "https://randomuser.me/api/portraits/men/90.jpg",
-                    IsMain = true,
-                },
+                //new Photo()
+                //{
+                //    Id = 6,
+                //    AppUserId = 6,
+                //    Url = "https://randomuser.me/api/portraits/men/90.jpg",
+                //    IsMain = true,
+                //},
 
                 new Photo()
                 {
